@@ -1,88 +1,107 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-body {
-    height: 100vh;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body{
+    height:100vh;
 }
 
-.container {
-    width: 350px;
+/* Animated Gradient Background */
+.background{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(-45deg,#6a11cb,#2575fc,#00c6ff,#0072ff);
+    background-size:400% 400%;
+    animation: gradientBG 12s ease infinite;
 }
 
-.login-form {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    text-align: center;
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-.login-form h2 {
-    margin-bottom: 30px;
-    color: #333;
+/* Glass Login Box */
+.login-box{
+    width:360px;
+    padding:40px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    text-align:center;
+    color:white;
 }
 
-.input-group {
-    position: relative;
-    margin-bottom: 25px;
+.login-box h2{
+    margin-bottom:5px;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    font-size: 14px;
+.subtitle{
+    font-size:14px;
+    margin-bottom:30px;
+    opacity:0.8;
 }
 
-.input-group label {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    color: #777;
-    background: white;
-    padding: 0 5px;
-    transition: 0.3s;
+/* Inputs */
+.input-box{
+    position:relative;
+    margin-bottom:25px;
 }
 
-.input-group input:focus + label,
-.input-group input:valid + label {
-    top: -8px;
-    font-size: 12px;
-    color: #667eea;
+.input-box input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    outline:none;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: #667eea;
-    color: white;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
+.input-box label{
+    position:absolute;
+    left:12px;
+    top:12px;
+    color:#555;
+    transition:0.3s;
+    pointer-events:none;
 }
 
-button:hover {
-    background: #5563d1;
+.input-box input:focus + label,
+.input-box input:valid + label{
+    top:-8px;
+    font-size:12px;
+    color:#fff;
 }
 
-.register {
-    margin-top: 20px;
-    font-size: 14px;
+/* Button */
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:#2575fc;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-.register a {
-    color: #667eea;
-    text-decoration: none;
+button:hover{
+    transform:scale(1.05);
+}
+
+/* Extra Text */
+.extra{
+    margin-top:15px;
+    font-size:14px;
+}
+
+.extra a{
+    color:white;
+    text-decoration:underline;
 }

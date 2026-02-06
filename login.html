@@ -2,33 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>Premium Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
-    <form class="login-form">
-        <h2>Login</h2>
+<div class="background">
+    <div class="login-box">
 
-        <div class="input-group">
-            <input type="text" required>
-            <label>Username</label>
-        </div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to continue</p>
 
-        <div class="input-group">
-            <input type="password" required>
-            <label>Password</label>
-        </div>
+        <form id="loginForm">
 
-        <button type="submit">Login</button>
+            <div class="input-box">
+                <input type="text" id="username" required>
+                <label>Username</label>
+            </div>
 
-        <p class="register">
-            Don't have an account? <a href="#">Register</a>
-        </p>
-    </form>
+            <div class="input-box">
+                <input type="password" id="password" required>
+                <label>Password</label>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <p class="extra">
+                Forgot Password? <a href="#">Reset</a>
+            </p>
+
+        </form>
+
+    </div>
 </div>
+
+<script>
+    // DOM Selection
+    const form = document.getElementById("loginForm");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+
+    // DOM Event Handling
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        if(username.value.trim() === "" || password.value.trim() === ""){
+            alert("Please enter Username and Password");
+        }
+        else{
+            alert("Welcome " + username.value);
+        }
+    });
+</script>
 
 </body>
 </html>
