@@ -1,59 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Premium Login</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz App</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="background">
-    <div class="login-box">
+<!-- ===== LOGIN ===== -->
+<div class="card" id="loginPage">
+    <h2>Student Login</h2>
 
-        <h2>Welcome Back</h2>
-        <p class="subtitle">Login to continue</p>
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
 
-        <form id="loginForm">
+    <p class="error" id="errorMsg"></p>
 
-            <div class="input-box">
-                <input type="text" id="username" required>
-                <label>Username</label>
-            </div>
+    <button onclick="startQuiz()">Start Quiz</button>
+</div>
 
-            <div class="input-box">
-                <input type="password" id="password" required>
-                <label>Password</label>
-            </div>
 
-            <button type="submit">Login</button>
+<!-- ===== QUIZ ===== -->
+<div class="card hidden" id="quizPage">
+    <h2 id="question"></h2>
 
-            <p class="extra">
-                Forgot Password? <a href="#">Reset</a>
-            </p>
+    <div id="options"></div>
 
-        </form>
+    <p id="score">Score: 0</p>
+    <button id="nextBtn" class="hidden" onclick="nextQuestion()">Next Question</button>
+</div>
 
-    </div>
+
+<!-- ===== RESULT ===== -->
+<div class="card hidden" id="resultPage">
+    <h2>Quiz Finished 🎉</h2>
+    <p id="finalScore"></p>
+
+    <h3>Leaderboard</h3>
+    <div id="leaderboard"></div>
+
+    <button onclick="restart()">Play Again</button>
 </div>
 
 <script>
-    // DOM Selection
-    const form = document.getElementById("loginForm");
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
+const questions=[
+ {q:"What does HTML stand for?",options:["Hyper Text Markup Language","Home Tool","Hyper Transfer"],ans:0},
+ {q:"Which is used for styling?",options:["CSS","Python","Java"],ans:0},
+ {q:"JS is?",options:["Language","Browser","OS"],ans:0},
+ {q:"Which tag creates link?",options:["<a>","<p>","<div>"],ans:0},
+ {q:"DOM stands for?",options:["Document Object Model","Data Object","Design Object"],ans:0}
+];
 
-    // DOM Event Handling
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
+let index=0,score=0,player="";
 
-        if(username.value.trim() === "" || password.value.trim() === ""){
-            alert("Please enter Username and Password");
-        }
-        else{
-            alert("Welcome " + username.value);
-        }
-    });
+function startQuiz(){
+ let name=document.getElementById("name").value.trim();
+ let email=document.getElementById("email").value.trim();
+
+ if(name===""||email===""){
+  document.getElementById("errorMsg").textContent="Fill all fields";
+  return;
+ }
+
+ player=name;
+ document.getElementById("loginPage").classList.add("hidden");
+ document.getElementById("quizPage").classList.remove("hidden");
+
+ loadQuestion();
+}
+
+function loadQuestion(){
+ document.getElementById("nextBtn").classList.add("hidden");
+
+ let q=questions[index];
+ document.getElementById("question").textContent=q.q;
+
+ let html="";
+ q.options.forEach((opt,i)=>{
+   html += `<button class="option" onclick="selectAns(${i})">${opt}</button>`;
+ });
+
+ document.getElementById("options").innerHTML=html;
+}
+
+function selectAns(i){
+ let correct=questions[index].ans;
+ let btns=document.querySelectorAll(".option");
+
+ btns.forEach(b=>b.disabled=true);
+
+ if(i===correct){
+   btns[i].classList.add("correct");
+   score++;
+ }else{
+   btns[i].classList.add("wrong");
+   btns[correct].classList.add("correct");
+ }
+
+ document.getElementById("score").textContent="Score: "+score;
+ document.getElementById("nextBtn").classList.remove("hidden");
+}
+
+function nextQuestion(){
+ index++;
+ if(index<questions.length){
+   loadQuestion();
+ }else{
+   showResult();
+ }
+}
+
+function showResult(){
+ document.getElementById("quizPage").classList.add("hidden");
+ document.getElementById("resultPage").classList.remove("hidden");
+
+ document.getElementById("finalScore").textContent=
+ `${player} scored ${score}/${questions.length}`;
+
+ let lb=JSON.parse(localStorage.getItem("lb")||"[]");
+ lb.push({name:player,score});
+ lb.sort((a,b)=>b.score-a.score);
+ localStorage.setItem("lb",JSON.stringify(lb));
+
+ renderLeaderboard();
+}
+
+function renderLeaderboard(){
+ let lb=JSON.parse(localStorage.getItem("lb")||"[]");
+ let html="";
+ lb.slice(0,5).forEach((p,i)=>{
+   html+=`<p>${i+1}. ${p.name} - ${p.score}</p>`;
+ });
+ document.getElementById("leaderboard").innerHTML=html;
+}
+
+function restart(){
+ index=0; score=0;
+ document.getElementById("resultPage").classList.add("hidden");
+ document.getElementById("loginPage").classList.remove("hidden");
+}
 </script>
 
 </body>
