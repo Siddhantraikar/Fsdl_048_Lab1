@@ -1,93 +1,85 @@
 *{
- margin:0;
- padding:0;
- box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
 }
 
 body{
- font-family:Arial, sans-serif;
- background:linear-gradient(135deg,#ff9a3c,#ff5f6d,#6a11cb);
- min-height:100vh;
- display:flex;
- justify-content:center;
- align-items:center;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#1e293b;   /* ← new solid background color */
 }
 
-/* CARD */
 .card{
- width:380px;
- background:white;
- padding:25px;
- border-radius:12px;
- box-shadow:0 8px 25px rgba(0,0,0,0.2);
- text-align:center;
-}
-
-h2{
- margin-bottom:15px;
- color:#333;
-}
-
-input{
- width:100%;
- padding:10px;
- margin:8px 0;
- border:1px solid #ccc;
- border-radius:6px;
-}
-
-button{
- width:100%;
- padding:10px;
- margin-top:10px;
- border:none;
- border-radius:6px;
- cursor:pointer;
- background:#6a11cb;
- color:white;
- font-size:15px;
-}
-
-button:hover{
- background:#5011a8;
-}
-
-/* OPTIONS */
-.option{
- display:block;
- width:100%;
- background:#f3f3f3;
- color:#000;
- margin:8px 0;
-}
-
-.correct{
- background:#2ecc71 !important;
- color:white;
-}
-
-.wrong{
- background:#e74c3c !important;
- color:white;
-}
-
-#score{
- margin-top:10px;
- font-weight:bold;
- color:#444;
-}
-
-.error{
- color:red;
- font-size:13px;
+    width:380px;
+    background:white;
+    padding:28px;
+    border-radius:16px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    text-align:center;
 }
 
 .hidden{
- display:none;
+    display:none;
+}
+
+h2{
+    margin-bottom:18px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:2px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:10px;
+    background:#4facfe;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2f8dfd;
+}
+
+.option{
+    display:block;
+    margin:7px 0;
+    background:#f1f5f9;
+    color:#222;
+}
+
+.correct{
+    background:#22c55e !important;
+    color:white;
+}
+
+.wrong{
+    background:#ef4444 !important;
+    color:white;
+}
+
+.error{
+    color:red;
+    font-size:14px;
+    margin-top:5px;
 }
 
 #leaderboard p{
- margin:5px 0;
- color:#333;
- font-weight:500;
+    background:#f5f5f5;
+    padding:8px;
+    margin:6px 0;
+    border-radius:8px;
 }
